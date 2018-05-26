@@ -1,0 +1,8 @@
+{
+  "name": "tis",
+  "app_id": "a067010b",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
