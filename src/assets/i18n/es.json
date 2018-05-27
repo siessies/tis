@@ -11,8 +11,8 @@
 
   "MAP_TITLE": "Mapa",
 
-  "TUTORIAL_SLIDE1_TITLE": "Bienvenido/a al Ionic Super Starter",
-  "TUTORIAL_SLIDE1_DESCRIPTION": "El <b>Ionic Super Starter</b> es un starter de Ionic completo con muchas páginas preconstruidas y mejores prácticas.",
+  "TUTORIAL_SLIDE1_TITLE": "<b>Tree Injection Solutions</b>",
+  "TUTORIAL_SLIDE1_DESCRIPTION": "<b>Una app para crear y mantener el inventario de árboles, su historia, tratamientos y soluciones</b>",
 
   "TUTORIAL_SLIDE2_TITLE": "Cómo usar el Super Starter",
   "TUTORIAL_SLIDE2_DESCRIPTION": "Monta los varios tipos de página que quieras y quita los que no. Hemos incluido muchas estructuras de página comunes en apps móviles, como páginas de inicio de sesión y registro, pestañas, y esta página de tutorial.",
