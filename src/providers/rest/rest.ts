@@ -9,11 +9,25 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class RestProvider {
-  apiUrl = 'http://ws.kitsti.com'; /* https://jsonplaceholder.typicode.com'; */
+  apiUrl = 'http://ws.kitsti.com';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
   }
+
+  /* t0 */
+
+  getT0() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl+'/t0').subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  /* users */
 
   getUsers() {
     return new Promise(resolve => {

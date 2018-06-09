@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
 
 import { User } from '../../providers';
 import { MainPage } from '../';
@@ -11,12 +12,15 @@ import { MainPage } from '../';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  t0: any;
+  
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  account: { email: string, password: string } = {
+  account: { email: string, password: string, t0: string} = {
     email: 'test@example.com',
-    password: 'test'
+    password: 'test',
+    t0: 'NOK'
   };
 
   // Our translated text strings
@@ -25,11 +29,28 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public restProvider: RestProvider) {
+
+    // Get t0 and send it to hidden input field
+    this.getT0();
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
+  }
+
+  getT0() {
+    this.restProvider.getT0()
+      .then(data => {
+        this.t0 = data;
+        console.log(this.t0);
+
+        // Send t0 to hidden input field
+        if (this.t0.status == "OK") {
+          this.account.t0 = this.t0.t0;
+        }     
+      });
   }
 
   // Attempt to login in through our User service
