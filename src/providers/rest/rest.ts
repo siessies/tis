@@ -15,12 +15,26 @@ export class RestProvider {
     console.log('Hello RestProvider Provider');
   }
 
+  /* login */
+
+  login(data) {
+    return new Promise(resolve => {
+      console.log(this.apiUrl+'/login/', JSON.stringify(data));
+      this.http.post(this.apiUrl+'/login', JSON.stringify(data)).subscribe(res => {
+        console.log(res);
+        resolve(res);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   /* t0 */
 
   getT0() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/t0').subscribe(data => {
-        resolve(data);
+      this.http.get(this.apiUrl+'/t0').subscribe(res => {
+        resolve(res);
       }, err => {
         console.log(err);
       });
@@ -31,8 +45,8 @@ export class RestProvider {
 
   getUsers() {
     return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/users').subscribe(data => {
-        resolve(data);
+      this.http.get(this.apiUrl+'/users').subscribe(res => {
+        resolve(res);
       }, err => {
         console.log(err);
       });
