@@ -9,18 +9,51 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class RestProvider {
-  apiUrl = 'http://ws.kitsti.com';
+  // apiUrl = 'http://ws.kitsti.com';
+  // apiUrl = 'http://ws.kitsti.com/wsApi/public/api';
+  apiUrl = 'http://wsApi.localhost/api';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
   }
 
+    /*
+      let serialize = function(obj, prefix) {
+            var str = [];
+            for(var p in obj) {
+                if (obj.hasOwnProperty(p)) {
+                    var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+                    var item = '';
+                    if (typeof v === "object") {
+                        item = serialize(v, k);
+                    }
+                    else {
+                        item = encodeURIComponent(k)+"="+encodeURIComponent(v);
+                    }
+
+                    if (item !== '') {
+                        str.push(item);
+                    }
+                }
+            }
+            return str.join("&");
+        };
+        Using:
+        this.http.post(this.apiUrl+'/login', serialize({email:"admin@admin.com",password:"1234"}), {headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}})
+    */
+
   /* login */
 
   login(data) {
     return new Promise(resolve => {
-      console.log(this.apiUrl+'/login/', JSON.stringify(data));
-      this.http.post(this.apiUrl+'/login', JSON.stringify(data)).subscribe(res => {
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      
+      console.log(this.apiUrl+'/login/', data);
+      
+      this.http.post(this.apiUrl+'/login', JSON.stringify(data), headers)
+      .subscribe(res => {
         console.log(res);
         resolve(res);
       }, err => {

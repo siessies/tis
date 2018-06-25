@@ -68,7 +68,7 @@ export class LoginPage {
       });  */
 
     this.restProvider.login(this.account)
-    .then((res) => {
+    .then(res => {
       console.log(this.res);
       this.navCtrl.push(MainPage);
     }, (err) => {
