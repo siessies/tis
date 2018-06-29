@@ -12,12 +12,14 @@ export class RestProvider {
   // apiUrl = 'http://ws.kitsti.com';
   // apiUrl = 'http://ws.kitsti.com/wsApi/public/api';
   apiUrl = 'http://wsApi.localhost/api';
+  tokenArray: any;
+
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');
   }
 
-    /*
+    /* Alfred 2018
       let serialize = function(obj, prefix) {
             var str = [];
             for(var p in obj) {
@@ -43,8 +45,27 @@ export class RestProvider {
     */
 
   /* login */
+  login(accountInfo: any) {
+    // let seq = this.api.post('login', accountInfo).share();
+    let seq = this.http.post(this.apiUrl+'/login', JSON.stringify(accountInfo)).share();
+    console.log(this.apiUrl+'/login/', accountInfo);
 
-  login(data) {
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      console.log(res);
+      if (res.token_type == 'Bearer') {
+        this.tokenArray = res;
+        console.log('OK-login');
+      } else {
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  loginX(data) {
     return new Promise(resolve => {
 
       let headers = new Headers();
@@ -54,21 +75,11 @@ export class RestProvider {
       
       this.http.post(this.apiUrl+'/login', JSON.stringify(data), headers)
       .subscribe(res => {
-        console.log(res);
+        this.tokenArray = res;
+        console.log(this.tokenArray);
         resolve(res);
       }, err => {
-        console.log(err);
-      });
-    });
-  }
-
-  /* t0 */
-
-  getT0() {
-    return new Promise(resolve => {
-      this.http.get(this.apiUrl+'/t0').subscribe(res => {
-        resolve(res);
-      }, err => {
+        console.log('login.Erróneo');
         console.log(err);
       });
     });
