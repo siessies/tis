@@ -12,19 +12,19 @@ import { Items } from '../../providers';
 })
 export class ListMasterPage {
   currentItems: Item[];
-  users: any;
+  trees: any;
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
               public restProvider: RestProvider) {
     this.currentItems = this.items.query();
-    this.getUsers();
+    this.getTrees();
   }
 
-  getUsers() {
-    this.restProvider.getUsers()
+  getTrees() {
+    this.restProvider.getTrees()
       .then(data => {
-        this.users = data;
-        console.log(this.users);
+        this.trees = data;
+        console.log(this.trees);
       });
   }
 

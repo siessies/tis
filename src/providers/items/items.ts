@@ -9,6 +9,7 @@ export class Items {
   constructor(public api: Api) { }
 
   query(params?: any) {
+  console.log('Query to bring Items? Not passing here...');
     return this.api.get('/items', params);
   }
 

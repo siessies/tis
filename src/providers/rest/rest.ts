@@ -13,6 +13,9 @@ export class RestProvider {
   // apiUrl = 'http://ws.kitsti.com/wsApi/public/api';
   apiUrl = 'http://wsApi.localhost/api';
   tokenArray: any;
+  companyId: integer;
+  
+
 
 
   constructor(public http: HttpClient) {
@@ -47,14 +50,17 @@ export class RestProvider {
   /* login */
   login(accountInfo: any) {
     // let seq = this.api.post('login', accountInfo).share();
-    let seq = this.http.post(this.apiUrl+'/login', JSON.stringify(accountInfo)).share();
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let request = this.http.post(this.apiUrl + '/login', JSON.stringify(accountInfo), headers).share();
     console.log(this.apiUrl+'/login/', accountInfo);
 
-    seq.subscribe((res: any) => {
+    request.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
       console.log(res);
       if (res.token_type == 'Bearer') {
         this.tokenArray = res;
+        this.companyId = 1;
         console.log('OK-login');
       } else {
       }
@@ -62,9 +68,31 @@ export class RestProvider {
       console.error('ERROR', err);
     });
 
-    return seq;
+    return request;
   }
 
+  /* trees */
+
+  getTrees() {
+    console.log('In rest.getTrees');
+    return new Promise(resolve => {
+      let headers = new Headers();
+      headers.append('Authorization', 'Bearer ' + this.tokenArray.access_token);
+      // headers.append('Accept', 'application/json');
+
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees', '', headers).share();
+
+      request.subscribe(res => {
+        console.log(res);
+        resolve(res);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+
+  /*
   loginX(data) {
     return new Promise(resolve => {
 
@@ -73,7 +101,7 @@ export class RestProvider {
       
       console.log(this.apiUrl+'/login/', data);
       
-      this.http.post(this.apiUrl+'/login', JSON.stringify(data), headers)
+      this.http.post(this.apiUrl+'/login', JSON.stringify(data)) // , headers)
       .subscribe(res => {
         this.tokenArray = res;
         console.log(this.tokenArray);
@@ -84,6 +112,7 @@ export class RestProvider {
       });
     });
   }
+  */
 
   /* users */
 

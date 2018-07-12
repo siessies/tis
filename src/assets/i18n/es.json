@@ -5,7 +5,7 @@
   "LOGIN": "Iniciar sesión",
   "SIGNUP": "Registrarse",
 
-  "TAB1_TITLE": "Items",
+  "TAB1_TITLE": "Árboles",
   "TAB2_TITLE": "Buscar",
   "TAB3_TITLE": "Ajustes",
 
@@ -42,7 +42,7 @@
   "SIGNUP_ERROR": "No se ha podido crear la cuenta. Por favor revise los datos de la cuenta e inténtelo de nuevo.",
   "SIGNUP_BUTTON": "Registrarse",
 
-  "LIST_MASTER_TITLE": "Items",
+  "LIST_MASTER_TITLE": "Árboles",
 
   "ITEM_CREATE_TITLE": "Nuevo Item",
   "ITEM_CREATE_CHOOSE_IMAGE": "Añadir Imagen",
