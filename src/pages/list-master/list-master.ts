@@ -16,7 +16,7 @@ export class ListMasterPage {
 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
               public restProvider: RestProvider) {
-    this.currentItems = this.items.query();
+    // this.currentItems = this.items.query();
     this.getTrees();
   }
 
@@ -24,7 +24,8 @@ export class ListMasterPage {
     this.restProvider.getTrees()
       .then(data => {
         this.trees = data;
-        console.log(this.trees);
+        this.currentItems = this.trees;
+        console.log(this.currentItems);
       });
   }
 

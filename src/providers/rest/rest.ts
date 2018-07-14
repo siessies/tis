@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -15,11 +15,8 @@ export class RestProvider {
   tokenArray: any;
   companyId: integer;
   
-
-
-
   constructor(public http: HttpClient) {
-    console.log('Hello RestProvider Provider');
+    console.log('Constructor RestProvider');
   }
 
     /* Alfred 2018
@@ -49,7 +46,6 @@ export class RestProvider {
 
   /* login */
   login(accountInfo: any) {
-    // let seq = this.api.post('login', accountInfo).share();
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let request = this.http.post(this.apiUrl + '/login', JSON.stringify(accountInfo), headers).share();
@@ -78,12 +74,11 @@ export class RestProvider {
     return new Promise(resolve => {
       let headers = new Headers();
       headers.append('Authorization', 'Bearer ' + this.tokenArray.access_token);
-      // headers.append('Accept', 'application/json');
+      headers.append('Accept', 'application/json');
+      
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees', {}, headers).share();
 
-      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees', '', headers).share();
-
-      request.subscribe(res => {
-        console.log(res);
+      request.subscribe((res: any) => {
         resolve(res);
       }, err => {
         console.log(err);
