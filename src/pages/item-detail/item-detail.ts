@@ -15,4 +15,12 @@ export class ItemDetailPage {
     this.item = navParams.get('item') || items.defaultItem;
   }
 
+  /**
+   * Navigate to the map page for this item.
+   */
+  openMap(item: Item) {
+    this.navCtrl.push('MapPage', {
+      item: item
+    });
+  }
 }

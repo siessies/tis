@@ -17,7 +17,9 @@
     	<ion-note item-end *ngIf="item.treeTypeName">{{item.treeTypeName}}</ion-note>
     </h2>
     <h3>{{item.name}}</h3>
-    <p>Location: {{item.latitude}}, {{item.longitude}}</p>
+    <button ion-item (click)="openMap(item)">
+      <p>Location: {{item.latitude}}, {{item.longitude}}</p>
+    </button>
     <img width="380" height="380" [src]="item.photo" />
   </div>
 

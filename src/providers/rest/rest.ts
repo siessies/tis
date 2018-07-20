@@ -46,9 +46,11 @@ export class RestProvider {
 
   /* login */
   login(accountInfo: any) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let request = this.http.post(this.apiUrl + '/login', JSON.stringify(accountInfo) /*, headers*/).share();
+    let headers = {
+        'Accept':'application/json'
+        }
+    let httpHeaders = new HttpHeaders(headers);
+    let request = this.http.post(this.apiUrl + '/login', JSON.stringify(accountInfo)/*, httpHeaders*/).share();
     console.log(this.apiUrl+'/login/', accountInfo);
 
     request.subscribe((res: any) => {
@@ -72,11 +74,30 @@ export class RestProvider {
   getTrees() {
     console.log('In rest.getTrees');
     return new Promise(resolve => {
+      /*
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':'Bearer ' + this.tokenArray.access_token,
+          'Accept':'application/json'
+        })
+      };
+      
+      const httpHeaders = new HttpHeaders({
+          'Authorization':'Bearer ' + this.tokenArray.access_token,
+          'Accept':'application/json'
+        })
+      */
+      let headers = {
+        'Authorization':'Bearer ' + this.tokenArray.access_token,
+        'Accept':'application/json'
+        }
+      let httpHeaders = new HttpHeaders(headers);
+      /*    
       let headers = new Headers();
       headers.append('Authorization', 'Bearer ' + this.tokenArray.access_token);
       headers.append('Accept', 'application/json');
-      
-      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees'/*, {}, headers*/).share();
+      */
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees', httpHeaders).share();
 
       request.subscribe((res: any) => {
         resolve(res);

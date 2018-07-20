@@ -10,7 +10,7 @@
 <ion-content>
   <form (submit)="doLogin()">
     <ion-list>
-
+      <div padding><div class="splash-logo"></div></div>
       <ion-item>
         <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
         <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
@@ -30,9 +30,9 @@
         <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
       </ion-item>
 
-      <div padding>
-        <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
-      </div>
+      <div padding><div padding-left><div padding-left><div padding-left><div padding-left><div padding-left>
+        <button ion-button color="secondary" round>{{ 'LOGIN_BUTTON' | translate }}</button>
+      </div></div></div></div></div></div>
 
     </ion-list>
   </form>
