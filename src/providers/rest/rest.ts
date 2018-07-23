@@ -97,7 +97,7 @@ export class RestProvider {
       headers.append('Authorization', 'Bearer ' + this.tokenArray.access_token);
       headers.append('Accept', 'application/json');
       */
-      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees', httpHeaders).share();
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees'/*, httpHeaders*/).share();
 
       request.subscribe((res: any) => {
         resolve(res);

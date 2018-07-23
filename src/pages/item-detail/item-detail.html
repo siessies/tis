@@ -17,9 +17,18 @@
     	<ion-note item-end *ngIf="item.treeTypeName">{{item.treeTypeName}}</ion-note>
     </h2>
     <h3>{{item.name}}</h3>
-    <button ion-item (click)="openMap(item)">
-      <p>Location: {{item.latitude}}, {{item.longitude}}</p>
-    </button>
+    <p>
+      <button ion-button icon-only (click)="openMap(item)">
+        <ion-icon name="create"></ion-icon>
+      </button>
+      Status: <b *ngIf="item.treeStatus[0]">{{item.treeStatus[0].statusName}}</b>
+      
+      <BR>
+      <button ion-button icon-only (click)="openMap(item)">
+        <ion-icon name="navigate"></ion-icon>
+      </button>
+      Map 
+    </p>
     <img width="380" height="380" [src]="item.photo" />
   </div>
 
