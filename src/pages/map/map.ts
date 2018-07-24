@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Items } from '../../providers';
 
+import { Geolocation } from '@ionic-native/geolocation';
+
 declare var google;
 
 @IonicPage()
@@ -14,40 +16,42 @@ export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  /*
-  start = 'los angeles, ca';
-  end = 'los angeles, ca';
-  directionsService = new google.maps.DirectionsService;
-  directionsDisplay = new google.maps.DirectionsRenderer;
-  */
 
   item: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, items: Items) {
+  myPositionLatitude: any;
+  myPositionLongitude: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, items: Items, public geolocation: Geolocation) {
   	this.item = navParams.get('item') || items.defaultItem;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapPage');
-    this.initMap();
-  }
 
-  /*	
-  initMap() {
-  	let location = {'lat': this.item.latitude, 'lng': this.item.longitude};
-  	console.log(location);
-  	
-    this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      'zoom': 18,
-      'center': {'lat': 34.1047938, 'lng': -118.3333819}
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    this.geolocation.getCurrentPosition(/*options*/).then((position) => {
+      this.myPositionLatitude = position.coords.latitude;
+      this.myPositionLongitude = position.coords.longitude;
+
+      console.log('this.myPositionLatitude', this.myPositionLatitude, this.myPositionLongitude);
+
+      this.initMap();
     });
 
-    // this.directionsDisplay.setMap(this.map);
-  }*/
+    // this.initMap();
+  }
 
   initMap() {
   	let latLng = new google.maps.LatLng(this.item.latitude, this.item.longitude);
- 
+    // let latLng = new google.maps.LatLng(this.myPositionLatitude, this.myPositionLongitude);
+    console.log('tthis.item.latitude', this.item.latitude, this.item.longitude);
+    console.log('tthis.myPositionLatitude', this.myPositionLatitude, this.myPositionLongitude);
+    
     let mapOptions = {
       center: latLng,
       zoom: 20,
