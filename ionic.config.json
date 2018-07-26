@@ -1,8 +1,12 @@
 {
   "name": "tis",
-  "app_id": "a067010b",
-  "type": "ionic-angular",
+  "version": "1.0.0",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "a067010b",
+
+  "wsPath": "http://ws.kitsti.com/index.php/api"
+
 }

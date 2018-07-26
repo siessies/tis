@@ -14,6 +14,7 @@ export class ItemDetailPage {
 
   constructor(public navCtrl: NavController, navParams: NavParams, items: Items) {
     this.item = navParams.get('item') || items.defaultItem;
+    open
   }
 
   /**
@@ -21,6 +22,15 @@ export class ItemDetailPage {
    */
   openMap(item: Item) {
     this.navCtrl.push('MapPage', {
+      item: item
+    });
+  }
+
+  /**
+   * Navigate to the treeStatus-list page for this item.
+   */
+  openTreeStatusList(item: Item) {
+    this.navCtrl.push('TreeStatusListPage', {
       item: item
     });
   }

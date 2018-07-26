@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import config from '../../../ionic.config.json';
+
 /*
   Generated class for the RestProvider provider.
 
@@ -11,12 +13,14 @@ import { Injectable } from '@angular/core';
 export class RestProvider {
   // apiUrl = 'http://ws.kitsti.com';
   // apiUrl = 'http://ws.kitsti.com/wsApi/public/api';
-  apiUrl = 'http://wsApi.localhost/api';
+  // apiUrl = 'http://wsApi.localhost/api';
+  apiUrl = config.wsPath;
+
   tokenArray: any;
   companyId: any;
   
   constructor(public http: HttpClient) {
-    console.log('Constructor RestProvider');
+    console.log('Constructor RestProvider - apiUrl: ' .  this.apiUrl);
   }
 
     /* Alfred 2018

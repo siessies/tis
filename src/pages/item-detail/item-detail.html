@@ -18,8 +18,8 @@
     </h2>
     <h3>{{item.name}}</h3>
     <p>
-      <button ion-button icon-only (click)="openMap(item)">
-        <ion-icon name="create"></ion-icon>
+      <button ion-button icon-only (click)="openTreeStatusList(item)">
+        <ion-icon name="document"></ion-icon>
       </button>
       Status: <b *ngIf="item.treeStatus[0]">{{item.treeStatus[0].statusName}}</b>
       
@@ -27,7 +27,7 @@
       <button ion-button icon-only (click)="openMap(item)">
         <ion-icon name="navigate"></ion-icon>
       </button>
-      Map 
+      {{ 'MAP_TITLE' | translate }} 
     </p>
     <img width="380" height="380" [src]="item.photo" />
   </div>

@@ -11,7 +11,7 @@
 
   "MAP_TITLE": "Mapa",
 
-"TUTORIAL_CONTINUE_BUTTON": "Continuar",
+  "TUTORIAL_CONTINUE_BUTTON": "Continuar",
 
   "TUTORIAL_SLIDE1_TITLE": "<b>Tree Injection Solutions</b>",
   "TUTORIAL_SLIDE1_DESCRIPTION": "<b>Una app para crear y mantener el inventario de árboles, su historia, tratamientos y soluciones</b>",
@@ -43,6 +43,7 @@
   "SIGNUP_BUTTON": "Registrarse",
 
   "LIST_MASTER_TITLE": "Árboles",
+  "LIST_TREE_STATUS_TITLE": "Estados del árbol",
 
   "ITEM_CREATE_TITLE": "Nuevo Item",
   "ITEM_CREATE_CHOOSE_IMAGE": "Añadir Imagen",
