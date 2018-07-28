@@ -5,8 +5,6 @@
     "cordova": {}
   },
   "type": "ionic-angular",
-  "pro_id": "a067010b",
-
-  "wsPath": "http://ws.kitsti.com/index.php/api"
-
+  "pro_id": "a067010b"
+  
 }
