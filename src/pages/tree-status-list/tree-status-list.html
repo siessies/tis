@@ -16,12 +16,14 @@
 
   <ion-list>
   	<div padding>
-  	  <ion-note item-end *ngIf="item.treeTypeName">{{item.treeTypeName}}</ion-note>
+	  <h4>
+	  	<ion-note item-end *ngIf="item.treeTypeName">{{item.treeTypeName}}</ion-note>
+	  	{{ 'LIST_TREE_STATUS_TITLE' | translate }}
+	  </h4>
   	</div>
     <ion-item-sliding *ngFor="let status of item.treeStatus">
       <button ion-item (click)="openItem(item)">
-        <h2>{{status.statusKey}}</h2>
-        <p>{{status.statusName}}</p>
+        <h2>{{status.statusKey}} - {{status.statusName}}</h2>
         <h4 *ngIf="status.statusUpdatedAt.date">{{ 'UPDATED' | translate }}: {{status.statusUpdatedAt.date | date: 'yyyy MMM dd'}}</h4>
         <h4 *ngIf="status.statusEndDate">{{ 'END' | translate }}: {{status.statusEndDate | date: 'yyyy MMM dd'}}</h4>
       </button>
