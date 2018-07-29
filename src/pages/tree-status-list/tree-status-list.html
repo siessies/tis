@@ -15,11 +15,10 @@
 <ion-content>
 
   <ion-list>
-  	<div padding>
-	  <h4>
+  	<div padding-left>
+	  <h2>{{ 'LIST_TREE_STATUS_TITLE' | translate }}:
 	  	<ion-note item-end *ngIf="item.treeTypeName">{{item.treeTypeName}}</ion-note>
-	  	{{ 'LIST_TREE_STATUS_TITLE' | translate }}
-	  </h4>
+	  </h2>
   	</div>
     <ion-item-sliding *ngFor="let status of item.treeStatus">
       <button ion-item (click)="openItem(item)">
