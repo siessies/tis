@@ -1,18 +1,36 @@
-<!--
-  Generated template for the TreeStatusListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>treeStatus-list</ion-title>
+    <ion-title>{{ item.name }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+  <ion-list>
+  	<div padding>
+  	  <ion-note item-end *ngIf="item.treeTypeName">{{item.treeTypeName}}</ion-note>
+  	</div>
+    <ion-item-sliding *ngFor="let status of item.treeStatus">
+      <button ion-item (click)="openItem(item)">
+        <h2>{{status.statusKey}}</h2>
+        <p>{{status.statusName}}</p>
+        <h4 *ngIf="status.statusUpdatedAt.date">{{ 'UPDATED' | translate }}: {{status.statusUpdatedAt.date | date: 'yyyy MMM dd'}}</h4>
+        <h4 *ngIf="status.statusEndDate">{{ 'END' | translate }}: {{status.statusEndDate | date: 'yyyy MMM dd'}}</h4>
+      </button>
 
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          <!--{{ 'DELETE_BUTTON' | translate }}-->
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

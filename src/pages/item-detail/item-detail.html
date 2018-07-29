@@ -21,7 +21,7 @@
       <button ion-button icon-only (click)="openTreeStatusList(item)">
         <ion-icon name="document"></ion-icon>
       </button>
-      Status: <b *ngIf="item.treeStatus[0]">{{item.treeStatus[0].statusName}}</b>
+      {{ 'LIST_TREE_STATUS_TITLE' | translate }}: <b *ngIf="item.treeStatus[0]">{{item.treeStatus[0].statusName}}</b>
       
       <BR>
       <button ion-button icon-only (click)="openMap(item)">

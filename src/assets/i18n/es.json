@@ -43,7 +43,10 @@
   "SIGNUP_BUTTON": "Registrarse",
 
   "LIST_MASTER_TITLE": "Árboles",
-  "LIST_TREE_STATUS_TITLE": "Estados del árbol",
+  "LIST_TREE_STATUS_TITLE": "Estado",
+
+  "UPDATED": "Actualizado",
+  "END": "Fin",
 
   "ITEM_CREATE_TITLE": "Nuevo Item",
   "ITEM_CREATE_CHOOSE_IMAGE": "Añadir Imagen",

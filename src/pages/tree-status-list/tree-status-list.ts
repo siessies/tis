@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Items } from '../../providers';
+
 /**
  * Generated class for the TreeStatusListPage page.
  *
@@ -14,12 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tree-status-list.html',
 })
 export class TreeStatusListPage {
+  item: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, items: Items) {
+  	this.item = navParams.get('item') || items.defaultItem;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TreeStatusListPage');
+    console.log(this.item.treeStatus)
   }
 
 }

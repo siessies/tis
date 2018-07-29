@@ -39,7 +39,10 @@ export class MyApp {
     { title: 'Content', component: 'ContentPage' },
     { title: 'Login', component: 'LoginPage' },
     { title: 'Signup', component: 'SignupPage' },
-    { title: 'Master Detail', component: 'ListMasterPage' },
+    { title: 'List Master', component: 'ListMasterPage' },
+    { title: 'Item Detail', component: 'ItemDetailPage' },
+    { title: 'Tree Status', component: 'TreeStatusListPage' },
+    { title: 'Map', component: 'MapPage' },
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
     { title: 'Search', component: 'SearchPage' }
