@@ -45,20 +45,7 @@
 
       <ion-item>
         <ion-label> {{ 'TREE_TYPE_PLACEHOLDER' | translate }}</ion-label>
-        <!--
-        <ion-select formControlName="treeType">
-          <ion-option value="a">Avocado</ion-option>
-          <ion-option value="p">Palm</ion-option>
-        </ion-select>
-
-        <ion-select [(ngModel)]="value" [required]="true" [name]="value">
-            <ion-option *ngFor="let option of objectKeys(value)">
-                {{ value[option] }}
-            </ion-option>
-        </ion-select>
-        -->
-
-        <ion-select formControlName="treeType">
+        <ion-select required formControlName="treeType">
             <ion-option *ngFor="let treeType of treeTypes" [value] = "treeType.id">
                 {{ treeType.name }}
             </ion-option>
