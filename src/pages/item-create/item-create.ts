@@ -2,6 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
+
+import { TreeType } from '../../models/treeType';
+import { TreeTypes } from '../../providers';
 
 @IonicPage()
 @Component({
@@ -12,22 +16,36 @@ export class ItemCreatePage {
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
-
   item: any;
-
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+  currentTreeTypes: TreeType[];
+  treeTypes: any;
+
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera,
+              public restProvider: RestProvider) {
     this.form = formBuilder.group({
       profilePic: [''],
+      key: ['', Validators.required],
       name: ['', Validators.required],
-      about: ['']
+      treeType: ['']
     });
+
+    this.getTreeTypes();
 
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
+        this.isReadyToSave = this.form.valid;
     });
+  }
+
+  getTreeTypes() {
+    this.restProvider.getTreeTypes()
+      .then(data => {
+        this.treeTypes = data;
+        this.currentTreeTypes = this.treeTypes;
+        console.log(this.currentTreeTypes);
+      });
   }
 
   ionViewDidLoad() {
@@ -78,6 +96,9 @@ export class ItemCreatePage {
    */
   done() {
     if (!this.form.valid) { return; }
+    console.log('Saving');
+    console.log(this.form.value);
+    
     this.viewCtrl.dismiss(this.form.value);
   }
 }

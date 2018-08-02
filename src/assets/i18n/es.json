@@ -45,11 +45,19 @@
   "LIST_MASTER_TITLE": "Árboles",
   "LIST_TREE_STATUS_TITLE": "Estado",
 
+  "ITEM_CREATE_TITLE": "Nuevo árbol",
+  "ITEM_CREATE_CHOOSE_IMAGE": "Agregar imagen",
+
   "UPDATED": "Actualizado",
   "END": "Fin",
 
-  "ITEM_CREATE_TITLE": "Nuevo Item",
-  "ITEM_CREATE_CHOOSE_IMAGE": "Añadir Imagen",
+  "ITEM_KEY_PLACEHOLDER": "Clave",
+  "ITEM_NAME_PLACEHOLDER": "Nombre",
+  "TREE_TYPE_PLACEHOLDER": "Tipo árbol",
+
+  "DONE_BUTTON": "Listo",
+  "CANCEL_BUTTON": "Cancelar",
+  "DELETE_BUTTON": "Eliminar",
 
   "CARDS_TITLE": "Social",
 

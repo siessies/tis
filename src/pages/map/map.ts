@@ -34,16 +34,16 @@ export class MapPage {
       timeout: 5000,
       maximumAge: 0
     };
-    this.geolocation.getCurrentPosition(/*options*/).then((position) => {
-      this.myPositionLatitude = position.coords.latitude;
-      this.myPositionLongitude = position.coords.longitude;
+    // this.geolocation.getCurrentPosition(/*options*/).then((position) => {
+    //  this.myPositionLatitude = position.coords.latitude;
+    //  this.myPositionLongitude = position.coords.longitude;
 
-      console.log('this.myPositionLatitude', this.myPositionLatitude, this.myPositionLongitude);
+    //  console.log('this.myPositionLatitude', this.myPositionLatitude, this.myPositionLongitude);
 
-      this.initMap();
-    });
+    //  this.initMap();
+    // });
 
-    // this.initMap();
+    this.initMap();
   }
 
   initMap() {

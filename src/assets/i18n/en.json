@@ -52,14 +52,15 @@
   "LIST_MASTER_TITLE": "Trees",
   "LIST_TREE_STATUS_TITLE": "Status",
 
-  "ITEM_CREATE_TITLE": "New Item",
+  "ITEM_CREATE_TITLE": "New Tree",
   "ITEM_CREATE_CHOOSE_IMAGE": "Add Image",
 
   "UPDATED": "Updated",
   "END": "End",
-
+  
+  "ITEM_KEY_PLACEHOLDER": "About",
   "ITEM_NAME_PLACEHOLDER": "Name",
-  "ITEM_ABOUT_PLACEHOLDER": "About",
+  "TREE_TYPE_PLACEHOLDER": "Tree type",
 
   "DONE_BUTTON": "Done",
   "CANCEL_BUTTON": "Cancel",

@@ -21,32 +21,8 @@ export class RestProvider {
     console.log('Constructor RestProvider');
   }
 
-    /* Alfred 2018
-      let serialize = function(obj, prefix) {
-            var str = [];
-            for(var p in obj) {
-                if (obj.hasOwnProperty(p)) {
-                    var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
-                    var item = '';
-                    if (typeof v === "object") {
-                        item = serialize(v, k);
-                    }
-                    else {
-                        item = encodeURIComponent(k)+"="+encodeURIComponent(v);
-                    }
-
-                    if (item !== '') {
-                        str.push(item);
-                    }
-                }
-            }
-            return str.join("&");
-        };
-        Using:
-        this.http.post(this.apiUrl+'/login', serialize({email:"admin@admin.com",password:"1234"}), {headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}})
-    */
-
   /* login */
+
   login(accountInfo: any) {
     let headers = {
         'Accept':'application/json'
@@ -109,28 +85,20 @@ export class RestProvider {
     });
   }
 
+  /* treeTypes */
 
-  /*
-  loginX(data) {
+  getTreeTypes() {
+    console.log('In rest.getTreeTypes');
     return new Promise(resolve => {
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/treeTypes'/*, httpHeaders*/).share();
 
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      
-      console.log(this.apiUrl+'/login/', data);
-      
-      this.http.post(this.apiUrl+'/login', JSON.stringify(data)) // , headers)
-      .subscribe(res => {
-        this.tokenArray = res;
-        console.log(this.tokenArray);
+      request.subscribe((res: any) => {
         resolve(res);
       }, err => {
-        console.log('login.Erróneo');
         console.log(err);
       });
     });
   }
-  */
 
   /* users */
 
@@ -154,5 +122,53 @@ export class RestProvider {
           });
     });
   }
+
+
+  /*
+  loginX(data) {
+    return new Promise(resolve => {
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      
+      console.log(this.apiUrl+'/login/', data);
+      
+      this.http.post(this.apiUrl+'/login', JSON.stringify(data)) // , headers)
+      .subscribe(res => {
+        this.tokenArray = res;
+        console.log(this.tokenArray);
+        resolve(res);
+      }, err => {
+        console.log('login.Erróneo');
+        console.log(err);
+      });
+    });
+  }
+  */
+
+    /* Alfred 2018
+      let serialize = function(obj, prefix) {
+            var str = [];
+            for(var p in obj) {
+                if (obj.hasOwnProperty(p)) {
+                    var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+                    var item = '';
+                    if (typeof v === "object") {
+                        item = serialize(v, k);
+                    }
+                    else {
+                        item = encodeURIComponent(k)+"="+encodeURIComponent(v);
+                    }
+
+                    if (item !== '') {
+                        str.push(item);
+                    }
+                }
+            }
+            return str.join("&");
+        };
+        Using:
+        this.http.post(this.apiUrl+'/login', serialize({email:"admin@admin.com",password:"1234"}), {headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}})
+    */
 
 }

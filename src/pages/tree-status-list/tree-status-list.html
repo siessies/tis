@@ -21,15 +21,18 @@
 	  </h2>
   	</div>
     <ion-item-sliding *ngFor="let status of item.treeStatus">
-      <button ion-item (click)="openItem(item)">
+      <button ion-item (click)="openStatus(status)">
+        <ion-avatar item-start>
+          <img [src]="status.statusIcon" />
+        </ion-avatar>
         <h2>{{status.statusKey}} - {{status.statusName}}</h2>
-        <h4 *ngIf="status.statusUpdatedAt.date">{{ 'UPDATED' | translate }}: {{status.statusUpdatedAt.date | date: 'yyyy MMM dd'}}</h4>
+        <h4 *ngIf="status.statusUpdatedAt">{{ 'UPDATED' | translate }}: {{status.statusUpdatedAt | date: 'yyyy MMM dd'}}</h4>
         <h4 *ngIf="status.statusEndDate">{{ 'END' | translate }}: {{status.statusEndDate | date: 'yyyy MMM dd'}}</h4>
       </button>
 
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">
-          <!--{{ 'DELETE_BUTTON' | translate }}-->
+          {{ 'DELETE_BUTTON' | translate }}
         </button>
       </ion-item-options>
     </ion-item-sliding>

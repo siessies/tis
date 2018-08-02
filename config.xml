@@ -2,7 +2,7 @@
 <widget id="tis.followup.ionic" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>tis</name>
     <description>Tree Injection Solutions follow up app</description>
-    <author email=contact@treeinjectionsolutions.com" href="http://treeinjectionsolutions.com/">Tree Injection Solutions (by KitsYRef)</author>
+    <author email="contact@treeinjectionsolutions.com" href="http://treeinjectionsolutions.com/">Tree Injection Solutions (by KitsYRef)</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
