@@ -96,9 +96,23 @@ export class ItemCreatePage {
    */
   done() {
     if (!this.form.valid) { return; }
-    console.log('Saving');
-    console.log(this.form.value);
-    
+
+    // Call rest to create
+    this.restProvider.postTrees(this.form)
+    .subscribe((res) => {
+      //this.navCtrl.push(MainPage);
+    }, (err) => {
+      // Unable to process
+      let toast = this.toastCtrl.create({
+        message: 'this.loginErrorString',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    });
+
+
     this.viewCtrl.dismiss(this.form.value);
   }
+  
 }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 // import config from '../../assets/config.json';
@@ -11,7 +11,8 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class RestProvider {
-  apiUrl = "https://ws.kitsti.com/index.php/api";
+  // apiUrl = "https://ws.kitsti.com/index.php/api";
+  apiUrl = "http://wsApi.localhost/api";
   // apiUrl = config.wsPath;
 
   tokenArray: any;
@@ -24,15 +25,19 @@ export class RestProvider {
   /* login */
 
   login(accountInfo: any) {
-    let headers = {
-        'Accept':'application/json'
-        }
-    let httpHeaders = new HttpHeaders(headers);
-    let request = this.http.post(this.apiUrl + '/login', JSON.stringify(accountInfo)/*, httpHeaders*/).share();
+
+    const config = {headers: new HttpHeaders().set('Accept', 'application/json') };
+
+    const params = new HttpParams()
+      .set('email', accountInfo.email)
+      .set('password', accountInfo.password); // params, headers are immutable objects, therefore: sets chain
+
+    console.log('In rest.login', params);
+
+    let request = this.http.post(this.apiUrl + '/login', params, config).share();
     console.log(this.apiUrl+'/login/', accountInfo);
 
     request.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
       console.log(res);
       if (res.token_type == 'Bearer') {
         this.tokenArray = res;
@@ -52,30 +57,15 @@ export class RestProvider {
   getTrees() {
     console.log('In rest.getTrees');
     return new Promise(resolve => {
-      /*
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization':'Bearer ' + this.tokenArray.access_token,
-          'Accept':'application/json'
-        })
-      };
-      
-      const httpHeaders = new HttpHeaders({
-          'Authorization':'Bearer ' + this.tokenArray.access_token,
-          'Accept':'application/json'
-        })
-      */
-      let headers = {
+      let heads = {
         'Authorization':'Bearer ' + this.tokenArray.access_token,
         'Accept':'application/json'
         }
-      let httpHeaders = new HttpHeaders(headers);
-      /*    
-      let headers = new Headers();
-      headers.append('Authorization', 'Bearer ' + this.tokenArray.access_token);
-      headers.append('Accept', 'application/json');
-      */
-      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees'/*, httpHeaders*/).share();
+
+      //const config = {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenArray.access_token) };
+      const config = {headers: new HttpHeaders().set('Accept', 'application/json') };
+
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees', config).share();
 
       request.subscribe((res: any) => {
         resolve(res);
@@ -83,6 +73,34 @@ export class RestProvider {
         console.log(err);
       });
     });
+  }
+
+  postTrees(formData: any) {
+  
+    const config = {headers: new HttpHeaders().set('Accept', 'application/json') };
+
+    const params = new HttpParams()
+      .set('key', formData.value.key)
+      .set('name', formData.value.name)
+      .set('active', 1)
+      .set('treeTypeId', formData.value.treeType); // params, headers are immutable objects, therefore: sets chain
+
+    console.log('In rest.postTrees', params);
+    
+    let request = this.http.post(this.apiUrl + '/company/' + this.companyId + '/trees', params, config).share();
+
+    request.subscribe((res: any) => {
+      console.log(res);
+      if (res.success == 'true') {
+        console.log(res.msg);
+      } else {
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return request;
+
   }
 
   /* treeTypes */
@@ -122,53 +140,5 @@ export class RestProvider {
           });
     });
   }
-
-
-  /*
-  loginX(data) {
-    return new Promise(resolve => {
-
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      
-      console.log(this.apiUrl+'/login/', data);
-      
-      this.http.post(this.apiUrl+'/login', JSON.stringify(data)) // , headers)
-      .subscribe(res => {
-        this.tokenArray = res;
-        console.log(this.tokenArray);
-        resolve(res);
-      }, err => {
-        console.log('login.Erróneo');
-        console.log(err);
-      });
-    });
-  }
-  */
-
-    /* Alfred 2018
-      let serialize = function(obj, prefix) {
-            var str = [];
-            for(var p in obj) {
-                if (obj.hasOwnProperty(p)) {
-                    var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
-                    var item = '';
-                    if (typeof v === "object") {
-                        item = serialize(v, k);
-                    }
-                    else {
-                        item = encodeURIComponent(k)+"="+encodeURIComponent(v);
-                    }
-
-                    if (item !== '') {
-                        str.push(item);
-                    }
-                }
-            }
-            return str.join("&");
-        };
-        Using:
-        this.http.post(this.apiUrl+'/login', serialize({email:"admin@admin.com",password:"1234"}), {headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}})
-    */
 
 }
