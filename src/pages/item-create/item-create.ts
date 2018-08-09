@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, ToastController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 import { RestProvider } from '../../providers/rest/rest';
 
 import { TreeType } from '../../models/treeType';
@@ -102,6 +103,7 @@ export class ItemCreatePage {
     .subscribe((res) => {
       //this.navCtrl.push(MainPage);
     }, (err) => {
+      /*
       // Unable to process
       let toast = this.toastCtrl.create({
         message: 'this.loginErrorString',
@@ -109,6 +111,7 @@ export class ItemCreatePage {
         position: 'top'
       });
       toast.present();
+      */
     });
 
 

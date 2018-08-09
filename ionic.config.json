@@ -5,6 +5,10 @@
     "cordova": {}
   },
   "type": "ionic-angular",
-  "pro_id": "a067010b"
-  
+  "pro_id": "a067010b"  
+
+,"proxies": [{
+    "path": "/apiServer",
+    "proxyUrl": "http://wsApi.localhost/api"
+	}]
 }

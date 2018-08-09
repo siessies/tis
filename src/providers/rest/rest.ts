@@ -12,11 +12,13 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RestProvider {
   // apiUrl = "https://ws.kitsti.com/index.php/api";
-  apiUrl = "http://wsApi.localhost/api";
+  // apiUrl = "http://wsApi.localhost/api";
+  apiUrl = "/apiServer";
   // apiUrl = config.wsPath;
 
   tokenArray: any;
   companyId: any;
+  configHeaders: any;
   
   constructor(public http: HttpClient) {
     console.log('Constructor RestProvider');
@@ -42,6 +44,8 @@ export class RestProvider {
       if (res.token_type == 'Bearer') {
         this.tokenArray = res;
         this.companyId = 1;
+        this.configHeaders = {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenArray.access_token)};
+
         console.log('OK-login');
       } else {
       }
@@ -57,15 +61,8 @@ export class RestProvider {
   getTrees() {
     console.log('In rest.getTrees');
     return new Promise(resolve => {
-      let heads = {
-        'Authorization':'Bearer ' + this.tokenArray.access_token,
-        'Accept':'application/json'
-        }
 
-      //const config = {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.tokenArray.access_token) };
-      const config = {headers: new HttpHeaders().set('Accept', 'application/json') };
-
-      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees', config).share();
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/trees', this.configHeaders).share();
 
       request.subscribe((res: any) => {
         resolve(res);
@@ -77,17 +74,15 @@ export class RestProvider {
 
   postTrees(formData: any) {
   
-    const config = {headers: new HttpHeaders().set('Accept', 'application/json') };
-
     const params = new HttpParams()
       .set('key', formData.value.key)
       .set('name', formData.value.name)
-      .set('active', 1)
+      .set('active', '1')
       .set('treeTypeId', formData.value.treeType); // params, headers are immutable objects, therefore: sets chain
 
     console.log('In rest.postTrees', params);
     
-    let request = this.http.post(this.apiUrl + '/company/' + this.companyId + '/trees', params, config).share();
+    let request = this.http.post(this.apiUrl + '/company/' + this.companyId + '/trees', params, this.configHeaders).share();
 
     request.subscribe((res: any) => {
       console.log(res);
@@ -108,7 +103,7 @@ export class RestProvider {
   getTreeTypes() {
     console.log('In rest.getTreeTypes');
     return new Promise(resolve => {
-      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/treeTypes'/*, httpHeaders*/).share();
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/treeTypes', this.configHeaders).share();
 
       request.subscribe((res: any) => {
         resolve(res);
