@@ -23,10 +23,15 @@ export class ItemCreatePage {
   currentTreeTypes: TreeType[];
   treeTypes: any;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera,
+  // Our translated text strings
+  private msgString: string;
+
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
+              public toastCtrl: ToastController, public translateService: TranslateService,
+              formBuilder: FormBuilder, public camera: Camera,
               public restProvider: RestProvider) {
     this.form = formBuilder.group({
-      profilePic: [''],
+      picture: [''],
       key: ['', Validators.required],
       name: ['', Validators.required],
       treeType: ['']
@@ -60,7 +65,7 @@ export class ItemCreatePage {
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
+        this.form.patchValue({ 'picture': 'data:image/jpg;base64,' + data });
       }, (err) => {
         alert('Unable to take photo');
       })
@@ -74,14 +79,14 @@ export class ItemCreatePage {
     reader.onload = (readerEvent) => {
 
       let imageData = (readerEvent.target as any).result;
-      this.form.patchValue({ 'profilePic': imageData });
+      this.form.patchValue({ 'picture': imageData });
     };
 
     reader.readAsDataURL(event.target.files[0]);
   }
 
   getProfileImageStyle() {
-    return 'url(' + this.form.controls['profilePic'].value + ')'
+    return 'url(' + this.form.controls['picture'].value + ')'
   }
 
   /**
@@ -97,25 +102,40 @@ export class ItemCreatePage {
    */
   done() {
     if (!this.form.valid) { return; }
+    console.log(this.form);
 
     // Call rest to create
     this.restProvider.postTrees(this.form)
     .subscribe((res) => {
+      this.translateService.get(res['msg']).subscribe((value) => {
+        this.msgString = value;
+      })
+      this.toast(this.msgString);
       //this.navCtrl.push(MainPage);
     }, (err) => {
-      /*
       // Unable to process
-      let toast = this.toastCtrl.create({
-        message: 'this.loginErrorString',
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-      */
+      console.log(err.error);
+      this.translateService.get(err.error['message']).subscribe((value) => {
+        this.msgString = value;
+      })
+      this.toast(this.msgString);
     });
 
-
-    this.viewCtrl.dismiss(this.form.value);
+    //this.viewCtrl.dismiss(this.form.value);
   }
+
+  /**
+   * Send messages through the toaster.
+   */
+  toast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();    
+  }
+
+
   
 }

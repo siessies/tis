@@ -9,6 +9,7 @@
 
 ,"proxies": [{
     "path": "/apiServer",
-    "proxyUrl": "http://wsApi.localhost/api"
+    "proxyUrl": "http://wsApi.localhost/api",
+    "XproxyUrl": "https://ws.kitsti.com/index.php/api"
 	}]
 }

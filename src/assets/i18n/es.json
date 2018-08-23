@@ -61,5 +61,9 @@
 
   "CARDS_TITLE": "Social",
 
-  "SEARCH_TITLE": "Buscar"
+  "SEARCH_TITLE": "Buscar",
+
+  "*** EXTERNAL MESSAGES BELOW ***": "",
+  "Saved" : "Guardado",
+  "The given data was invalid.": "Dato inválido."
 }

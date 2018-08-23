@@ -74,11 +74,12 @@ export class RestProvider {
 
   postTrees(formData: any) {
   
-    const params = new HttpParams()
+    const params = new HttpParams()   // params, headers are immutable objects, therefore: sets chain
       .set('key', formData.value.key)
       .set('name', formData.value.name)
       .set('active', '1')
-      .set('treeTypeId', formData.value.treeType); // params, headers are immutable objects, therefore: sets chain
+      .set('treeTypeId', formData.value.treeType)
+      .set('picture', formData.value.picture); 
 
     console.log('In rest.postTrees', params);
     
