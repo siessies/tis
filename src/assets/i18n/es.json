@@ -64,6 +64,7 @@
   "SEARCH_TITLE": "Buscar",
 
   "*** EXTERNAL MESSAGES BELOW ***": "",
-  "Saved" : "Guardado",
+  "Saved": "Guardado",
+  "Saved w/image": "Guardado c/imagen",
   "The given data was invalid.": "Dato inválido."
 }

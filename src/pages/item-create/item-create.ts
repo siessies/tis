@@ -6,7 +6,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { RestProvider } from '../../providers/rest/rest';
 
 import { TreeType } from '../../models/treeType';
-import { TreeTypes } from '../../providers';
 
 @IonicPage()
 @Component({
@@ -34,7 +33,8 @@ export class ItemCreatePage {
       picture: [''],
       key: ['', Validators.required],
       name: ['', Validators.required],
-      treeType: ['']
+      treeType: [''],
+      photo: ['']
     });
 
     this.getTreeTypes();
@@ -50,7 +50,7 @@ export class ItemCreatePage {
       .then(data => {
         this.treeTypes = data;
         this.currentTreeTypes = this.treeTypes;
-        console.log(this.currentTreeTypes);
+        //console.log(this.currentTreeTypes);
       });
   }
 
@@ -108,6 +108,8 @@ export class ItemCreatePage {
     this.restProvider.postTrees(this.form)
     .subscribe((res) => {
       this.translateService.get(res['msg']).subscribe((value) => {
+      console.log(res);
+        this.form.patchValue({ 'photo': res['tree']['photo'] });
         this.msgString = value;
       })
       this.toast(this.msgString);
@@ -120,8 +122,6 @@ export class ItemCreatePage {
       })
       this.toast(this.msgString);
     });
-
-    //this.viewCtrl.dismiss(this.form.value);
   }
 
   /**
@@ -133,7 +133,9 @@ export class ItemCreatePage {
       duration: 3000,
       position: 'top'
     });
-    toast.present();    
+    toast.present();
+
+    this.viewCtrl.dismiss(this.form.value);  
   }
 
 

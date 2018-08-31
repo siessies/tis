@@ -86,13 +86,12 @@ export class RestProvider {
     let request = this.http.post(this.apiUrl + '/company/' + this.companyId + '/trees', params, this.configHeaders).share();
 
     request.subscribe((res: any) => {
-      console.log(res);
+      //console.log(res);
       if (res.success == 'true') {
-        console.log(res.msg);
-      } else {
+        //console.log(res.msg);
       }
     }, err => {
-      console.error('ERROR', err);
+      //console.error('ERROR', err);
     });
 
     return request;

@@ -14,7 +14,7 @@ export class ListMasterPage {
   currentItems: Item[];
   trees: any;
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
               public restProvider: RestProvider) {
     // this.currentItems = this.items.query();
     this.getTrees();
@@ -25,7 +25,7 @@ export class ListMasterPage {
       .then(data => {
         this.trees = data;
         this.currentItems = this.trees;
-        console.log(this.currentItems);
+        //console.log(this.currentItems);
       });
   }
 
@@ -44,7 +44,10 @@ export class ListMasterPage {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
       if (item) {
-        this.items.add(item);
+        // console.log(item);
+        item['picture'] = '';
+        this.currentItems.push(item);
+        console.log(this.currentItems);
       }
     })
     addModal.present();
