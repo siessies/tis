@@ -79,6 +79,7 @@ export class RestProvider {
       .set('name', formData.value.name)
       .set('active', '1')
       .set('treeTypeId', formData.value.treeType)
+      .set('statusId', formData.value.status)
       .set('picture', formData.value.picture); 
 
     console.log('In rest.postTrees', params);
@@ -101,9 +102,22 @@ export class RestProvider {
   /* treeTypes */
 
   getTreeTypes() {
-    console.log('In rest.getTreeTypes');
-    return new Promise(resolve => {
+   return new Promise(resolve => {
       let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/treeTypes', this.configHeaders).share();
+
+      request.subscribe((res: any) => {
+        resolve(res);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  /* status */
+
+  getStatus() {
+   return new Promise(resolve => {
+      let request = this.http.get(this.apiUrl + '/company/' + this.companyId + '/status', this.configHeaders).share();
 
       request.subscribe((res: any) => {
         resolve(res);

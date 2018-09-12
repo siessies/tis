@@ -50,7 +50,15 @@
                 {{ treeType.name }}
             </ion-option>
         </ion-select>
+      </ion-item>
 
+      <ion-item>
+        <ion-label> {{ 'STATUS_PLACEHOLDER' | translate }}</ion-label>
+        <ion-select required formControlName="status">
+            <ion-option *ngFor="let status of statuses" [value] = "status.id">
+                {{ status.name }}
+            </ion-option>
+        </ion-select>
       </ion-item>
 
     </ion-list>

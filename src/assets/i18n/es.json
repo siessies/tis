@@ -54,6 +54,7 @@
   "ITEM_KEY_PLACEHOLDER": "Clave",
   "ITEM_NAME_PLACEHOLDER": "Nombre",
   "TREE_TYPE_PLACEHOLDER": "Tipo árbol",
+  "STATUS_PLACEHOLDER": "Situación",
 
   "DONE_BUTTON": "Listo",
   "CANCEL_BUTTON": "Cancelar",
@@ -66,5 +67,6 @@
   "*** EXTERNAL MESSAGES BELOW ***": "",
   "Saved": "Guardado",
   "Saved w/image": "Guardado c/imagen",
-  "The given data was invalid.": "Dato inválido."
+  "The given data was invalid.": "Dato inválido.",
+  "The key must be at least 2 characters.": "Clave debe tener al menos 2 caracteres."
 }

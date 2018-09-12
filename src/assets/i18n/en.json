@@ -61,6 +61,7 @@
   "ITEM_KEY_PLACEHOLDER": "About",
   "ITEM_NAME_PLACEHOLDER": "Name",
   "TREE_TYPE_PLACEHOLDER": "Tree type",
+  "STATUS_PLACEHOLDER": "Status",
 
   "DONE_BUTTON": "Done",
   "CANCEL_BUTTON": "Cancel",

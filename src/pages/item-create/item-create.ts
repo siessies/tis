@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { RestProvider } from '../../providers/rest/rest';
 
 import { TreeType } from '../../models/treeType';
+import { Status } from '../../models/status';
 
 @IonicPage()
 @Component({
@@ -16,11 +17,12 @@ export class ItemCreatePage {
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
-  item: any;
   form: FormGroup;
 
   currentTreeTypes: TreeType[];
   treeTypes: any;
+  currentStatus: Status[];
+  statuses: any;
 
   // Our translated text strings
   private msgString: string;
@@ -34,10 +36,15 @@ export class ItemCreatePage {
       key: ['', Validators.required],
       name: ['', Validators.required],
       treeType: [''],
-      photo: ['']
+      status: [''],
+      photo: [''],
+      id: [0],
+      treeTypeId: [0],
+      
     });
 
     this.getTreeTypes();
+    this.getStatus();
 
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -50,7 +57,14 @@ export class ItemCreatePage {
       .then(data => {
         this.treeTypes = data;
         this.currentTreeTypes = this.treeTypes;
-        //console.log(this.currentTreeTypes);
+      });
+  }
+
+  getStatus() {
+    this.restProvider.getStatus()
+      .then(data => {
+        this.statuses = data;
+        this.currentStatus = this.statuses;
       });
   }
 
@@ -104,30 +118,38 @@ export class ItemCreatePage {
     if (!this.form.valid) { return; }
     console.log(this.form);
 
+    let saved = false;
+
     // Call rest to create
     this.restProvider.postTrees(this.form)
     .subscribe((res) => {
       this.translateService.get(res['msg']).subscribe((value) => {
       console.log(res);
+        this.form.patchValue({ 'id': res['tree']['id'] });
+        this.form.patchValue({ 'treeTypeId': res['tree']['treeType'] });
         this.form.patchValue({ 'photo': res['tree']['photo'] });
         this.msgString = value;
+        saved = true;
       })
-      this.toast(this.msgString);
+      this.toast(this.msgString, saved);
       //this.navCtrl.push(MainPage);
     }, (err) => {
       // Unable to process
       console.log(err.error);
       this.translateService.get(err.error['message']).subscribe((value) => {
         this.msgString = value;
-      })
-      this.toast(this.msgString);
+        if(err.error['errors']['key']) {
+          this.msgString = this.msgString + ' (' + err.error['errors']['key'] + ')';
+        }
+     })
+      this.toast(this.msgString, saved);
     });
   }
 
   /**
    * Send messages through the toaster.
    */
-  toast(msg) {
+  toast(msg, saved) {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 3000,
@@ -135,7 +157,9 @@ export class ItemCreatePage {
     });
     toast.present();
 
-    this.viewCtrl.dismiss(this.form.value);  
+    if(saved) {
+      this.viewCtrl.dismiss(this.form.value);
+    }
   }
 
 

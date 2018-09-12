@@ -14,7 +14,7 @@ export class ListMasterPage {
   currentItems: Item[];
   trees: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
               public restProvider: RestProvider) {
     // this.currentItems = this.items.query();
     this.getTrees();
@@ -44,8 +44,9 @@ export class ListMasterPage {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
       if (item) {
-        // console.log(item);
+        console.log(item);
         item['picture'] = '';
+        item['treeStatus'] = '';
         this.currentItems.push(item);
         console.log(this.currentItems);
       }
